@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useEffect, useRef, useState } from "react"
 import { techStackIcons } from "../../assets/techstack"
 
 type ImageItem = {
@@ -11,14 +11,36 @@ const DEFAULT_IMAGES: ImageItem[] = Object.entries(techStackIcons)
   .filter((item): item is ImageItem => typeof item.src === "string")
 
 export default function DomeGallery() {
-  const items = useMemo(() => DEFAULT_IMAGES.slice(0, 12), [])
+  const galleryRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const gallery = galleryRef.current
+    if (!gallery) return
+
+    if (!("IntersectionObserver" in window)) {
+      setIsVisible(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true)
+        observer.disconnect()
+      }
+    }, { threshold: 0.15 })
+
+    observer.observe(gallery)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {items.map((item, index) => (
+    <div ref={galleryRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {DEFAULT_IMAGES.map((item, index) => (
         <div
           key={`${item.alt}-${index}`}
-          className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-slate-300/20 bg-slate-50/70 p-4 text-center shadow-sm shadow-slate-500/5 backdrop-blur-xl dark:border-slate-700/50 dark:bg-slate-900/60"
+          className={`skill-card${isVisible ? " is-visible" : ""} flex flex-col items-center justify-center gap-3 rounded-3xl border border-slate-300/20 bg-slate-50/70 p-4 text-center shadow-sm shadow-slate-500/5 backdrop-blur-xl dark:border-slate-700/50 dark:bg-slate-900/60`}
+          style={{ animationDelay: `${index * 55}ms` }}
         >
           <img
             src={item.src}

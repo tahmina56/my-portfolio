@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="canva" x1="20" y1="20" x2="108" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00C4CC"/>
+      <stop offset="1" stop-color="#7D2AE8"/>
+    </linearGradient>
+  </defs>
+  <text x="64" y="78" fill="url(#canva)" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-style="italic" font-weight="700" text-anchor="middle">Canva</text>
+</svg>

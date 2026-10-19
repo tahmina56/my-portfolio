@@ -4,7 +4,6 @@ import { useDarkMode } from '../../contexts/DarkModeContext';
 import { useThemeColors } from '../../hooks/useThemeColors';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { ExternalLink, Code, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { socialLinks } from '../../config/socialLinks';
 import { lightStars, darkStars, specialStars } from '../../assets/stars';
@@ -415,16 +414,14 @@ const Projects = () => {
       ))}
 
       {/* main content container with the project cards */}
-      <TooltipProvider delayDuration={200}>
-        <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
           <div className="flex items-center justify-center gap-1 mb-4">
             <h2 className="text-4xl font-bold" style={{ color: isDarkMode ? themeColors.colors.white : themeColors.colors.pink[500] }}>Проекты</h2>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button 
+            <button
                   className="inline-flex items-center justify-center bg-transparent border-none outline-none focus:outline-none" 
                   style={{ minWidth: '44px', minHeight: '44px' }}
                   aria-label="Информация об иконках проекта"
+                  title="Все иконки созданы мной!"
                 >
                   <Heart
                     className="h-5 w-5 cursor-pointer transition-colors"
@@ -433,12 +430,7 @@ const Projects = () => {
                     onMouseLeave={(e) => e.currentTarget.style.color = themeColors.primary}
                     fill="none"
                   />
-                </button>
-              </TooltipTrigger>
-              <TooltipContent className="bg-white text-gray-800 border-pink-200">
-                <p>все иконки созданы мной!</p>
-              </TooltipContent>
-            </Tooltip>
+              </button>
           </div>
           <p className="text-center mb-12 text-lg text-gray-600 dark:text-gray-300">
             Здесь представлены проекты, над которыми я работала недавно
@@ -636,8 +628,7 @@ const Projects = () => {
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
-        </div>
-      </TooltipProvider>
+      </div>
       
       {/* Gradient overlay for smooth transition to next section */}
       <div

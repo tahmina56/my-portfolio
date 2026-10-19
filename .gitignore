@@ -339,4 +339,9 @@ scripts/tmp/
 scripts/.cache/
 # GitHub files
 .github/
+!.github/
+.github/*
+!.github/workflows/
+.github/workflows/*
+!.github/workflows/*.yml
 .gitlab/

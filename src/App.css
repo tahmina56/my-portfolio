@@ -617,6 +617,31 @@ body {
 }
 
 /* Animations */
+.skill-card {
+  opacity: 0;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.skill-card.is-visible {
+  animation: skill-card-enter 560ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(139, 90, 101, 0.14);
+}
+
+@keyframes skill-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -625,6 +650,14 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-card {
+    opacity: 1;
+    animation: none;
+    transition: none;
   }
 }
 
